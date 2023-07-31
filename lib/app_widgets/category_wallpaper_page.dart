@@ -6,19 +6,20 @@ import 'package:my_wallpaper/bloc/wallpaper_state.dart';
 import 'package:my_wallpaper/screens/wallpaper_full_screen.dart';
 import 'package:my_wallpaper/ui_helper/ui_helper.dart';
 
-class AbstractScreen extends StatefulWidget {
-  AbstractScreen({super.key});
+class CategoryWallpaperPage extends StatefulWidget {
+  String? title;
+  CategoryWallpaperPage({super.key, required this.title});
 
   @override
-  State<AbstractScreen> createState() => _AbstractScreenState();
+  State<CategoryWallpaperPage> createState() => _CategoryWallpaperPage();
 }
 
-class _AbstractScreenState extends State<AbstractScreen> {
+class _CategoryWallpaperPage extends State<CategoryWallpaperPage> {
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<WallpaperBloc>(context).add(GetSearchedWallpaperEvent(query: 'abstract', perPage: '25'));
+    BlocProvider.of<WallpaperBloc>(context).add(GetSearchedWallpaperEvent(query: widget.title!, perPage: '25'));
   }
 
   @override
@@ -33,7 +34,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Abstract', style: mTextStyle30()),
+                Text(widget.title!, style: mTextStyle30()),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -66,11 +67,11 @@ class _AbstractScreenState extends State<AbstractScreen> {
                             WallpaperFullScreen(imgUrl: state.wallpapers.photos![index].src!.portrait.toString()),)),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: NetworkImage(state.wallpapers.photos![index].src!.portrait.toString()),
-                              fit: BoxFit.cover,
-                            )
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: NetworkImage(state.wallpapers.photos![index].src!.portrait.toString()),
+                                fit: BoxFit.cover,
+                              )
                           ),
                         ),
                       );

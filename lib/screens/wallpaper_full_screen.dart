@@ -4,7 +4,7 @@ import 'package:wallpaper/wallpaper.dart';
 
 class WallpaperFullScreen extends StatelessWidget {
   String imgUrl;
-  WallpaperFullScreen({required this.imgUrl});
+  WallpaperFullScreen({super.key, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class WallpaperFullScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: double.infinity,
             child: Image.network(imgUrl, fit: BoxFit.fitHeight),
           ),
@@ -24,13 +24,13 @@ class WallpaperFullScreen extends StatelessWidget {
                 InkWell(
                   onTap: ()=> Navigator.pop(context),
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 35, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 35, horizontal: 10),
                     width: size.width*0.14, height: size.width*0.14,
                     decoration: BoxDecoration(
                       color: Colors.blue[900],
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Icon(Icons.arrow_back_rounded, color: Colors.white,),
+                    child: const Icon(Icons.arrow_back_rounded, color: Colors.white,),
                   ),
                 ),
                 InkWell(
@@ -38,13 +38,13 @@ class WallpaperFullScreen extends StatelessWidget {
                     setWallpaper(context);
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 35, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 35, horizontal: 10),
                     width: size.width*0.14, height: size.width*0.14,
                     decoration: BoxDecoration(
                       color: Colors.blue[900],
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Icon(Icons.system_update, color: Colors.white,),
+                    child: const Icon(Icons.system_update, color: Colors.white,),
                   ),
                 ),
               ],
@@ -62,14 +62,14 @@ class WallpaperFullScreen extends StatelessWidget {
       return Container(
         height: size.height*0.25,
         width: size.width,
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
         ),
         child: Column(
           children: [
             Text('Set Wallpaper', style: mTextStyle16(color: Colors.red),),
-            Divider(indent: 20, endIndent: 20,),
+            const Divider(indent: 20, endIndent: 20,),
             InkWell(
               onTap: (){
                 process.listen((event) {},
@@ -79,15 +79,15 @@ class WallpaperFullScreen extends StatelessWidget {
                         height: size.height,
                         options: RequestSizeOptions.RESIZE_FIT,
                       );
-                     print(check);
+
                      ScaffoldMessenger.of(context).showSnackBar(
-                         SnackBar(content: Text('Wallpaper Set'),)
+                         const SnackBar(content: Text('Wallpaper Set'),)
                      );
                      Navigator.pop(context);
                     });
               },
                 child: Text('HOME SCREEN', style: mTextStyle16(fontWeight: FontWeight.w400),)),
-            Divider(indent: 20, endIndent: 20,),
+            const Divider(indent: 20, endIndent: 20,),
             InkWell(
               onTap: (){
                 process.listen((event) {},
@@ -98,13 +98,13 @@ class WallpaperFullScreen extends StatelessWidget {
                         options: RequestSizeOptions.RESIZE_FIT,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Wallpaper Set'),)
+                          const SnackBar(content: Text('Wallpaper Set'),)
                       );
                       Navigator.pop(context);
                     });
               },
                 child: Text('LOCK SCREEN', style: mTextStyle16(fontWeight: FontWeight.w400),)),
-            Divider(indent: 20, endIndent: 20,),
+            const Divider(indent: 20, endIndent: 20,),
             InkWell(
               onTap: (){
                 process.listen((event) {},
@@ -115,7 +115,7 @@ class WallpaperFullScreen extends StatelessWidget {
                         options: RequestSizeOptions.RESIZE_FIT,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Wallpaper Set'),)
+                          const SnackBar(content: Text('Wallpaper Set'),)
                       );
                       Navigator.pop(context);
                     });

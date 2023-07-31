@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:my_wallpaper/Services/wallpaper_model.dart';
 import 'package:my_wallpaper/app_widgets/categories_container.dart';
+import 'package:my_wallpaper/app_widgets/category_wallpaper_page.dart';
 import 'package:my_wallpaper/bloc/wallpaper_bloc.dart';
 import 'package:my_wallpaper/bloc/wallpaper_event.dart';
 import 'package:my_wallpaper/bloc/wallpaper_state.dart';
-import 'package:my_wallpaper/repository/repo.dart';
-import 'package:my_wallpaper/screens/abstract_screen.dart';
-import 'package:my_wallpaper/screens/animals_screen.dart';
-import 'package:my_wallpaper/screens/nature_screen.dart';
 import 'package:my_wallpaper/screens/search_screen.dart';
-import 'package:my_wallpaper/screens/space_screen.dart';
 import 'package:my_wallpaper/screens/wallpaper_full_screen.dart';
 import 'package:my_wallpaper/ui_helper/ui_helper.dart';
 
@@ -57,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      hintText: 'Find Wallpaper',
-                      contentPadding: EdgeInsets.all(15),
+                      hintText: 'Search Wallpaper',
+                      contentPadding: const EdgeInsets.all(15),
                       suffixIcon: TextButton(
                         onPressed: (){
                           if(formKey.currentState!.validate()){
@@ -66,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.cyanAccent.withOpacity(0.1)
+                          backgroundColor: Colors.transparent
                         ),
-                        child: Icon(Icons.search, color: Colors.cyan,),
+                        child: const Icon(Icons.search,color: Colors.cyan,),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)
@@ -97,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: BlocBuilder<WallpaperBloc, WallpaperState>(
                           builder: (context, state) {
                             if(state is WallpaperLoadingState){
-                              return Center(child: CircularProgressIndicator(),);
+                              return const Center(child: CircularProgressIndicator(),);
                             } else if(state is WallpaperLoadedState){
                               wallpapers = state.wallpapers;
                                 return ListView.builder(
@@ -111,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: Container(
                                         width: width*0.5,
-                                        margin: EdgeInsets.only(top: 10, right: 16),
+                                        margin: const EdgeInsets.only(top: 10, right: 16),
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(15),
                                             image: DecorationImage(
@@ -146,12 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AbstractScreen(),)),
+                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryWallpaperPage(title: 'Abstract'),)),
                                 child: CategoriesContainer(
                                     assetImg: 'assets/images/abstract.jpg', text: 'Abstract'),
                               ),
                               InkWell(
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => NatureScreen(),)),
+                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryWallpaperPage(title: 'Nature'),)),
                                 child: CategoriesContainer(
                                     assetImg: 'assets/images/nature.jpg', text: 'Nature'),
                               ),
@@ -161,14 +158,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => SpaceScreen(),)),
+                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryWallpaperPage(title: 'Space'),)),
                                 child: CategoriesContainer(
                                     assetImg: 'assets/images/space.jpg', text: 'Space'),
                               ),
                               InkWell(
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => AnimalsScreen(),)),
+                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryWallpaperPage(title: 'Animals'),)),
                                 child: CategoriesContainer(
-                                    assetImg: 'assets/images/animal.jpg', text: 'Animals'),
+                                    assetImg: 'assets/images/animal.jpeg', text: 'Animals'),
                               ),
                             ],
                           ),
@@ -184,4 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 }
+
+

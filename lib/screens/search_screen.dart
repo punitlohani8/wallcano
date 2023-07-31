@@ -8,7 +8,7 @@ import '../bloc/wallpaper_state.dart';
 
 class SearchScreen extends StatefulWidget {
   String query;
-  SearchScreen({required this.query});
+  SearchScreen({super.key, required this.query});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -19,8 +19,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     query = widget.query;
-    searchController..text = query;
-    BlocProvider.of<WallpaperBloc>(context).add(GetSearchedWallpaperEvent(query: query, perPage: '25'));
+    searchController.text = query;
+    BlocProvider.of<WallpaperBloc>(context).add(GetSearchedWallpaperEvent(query: query, perPage: '30'));
   }
   late String query;
   var searchController = TextEditingController();
@@ -38,8 +38,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Find Wallpaper',
-                    contentPadding: EdgeInsets.all(15),
+                    hintText: 'Search Wallpaper',
+                    contentPadding: const EdgeInsets.all(15),
                     suffixIcon: TextButton(
                       onPressed: (){
                         BlocProvider.of<WallpaperBloc>(context).add(GetSearchedWallpaperEvent(query: searchController.text.toString(), perPage: '25'));
@@ -47,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.cyanAccent.withOpacity(0.1)
                       ),
-                      child: Icon(Icons.search, color: Colors.cyan,),
+                      child: const Icon(Icons.search,),
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)
@@ -56,11 +56,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               BlocBuilder<WallpaperBloc, WallpaperState>(builder: (context, state) {
                 if(state is WallpaperLoadingState){
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is WallpaperLoadedState){
                   return Expanded(
                     child: GridView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 15,
